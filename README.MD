@@ -4,9 +4,10 @@ Clasificar los pixeles de una imagen sand_sea, identificando si pertenecen a una
 
 
 # Dependencias
-
+`
 pip install numpy
 pip install matplotlib
+`
 
 # Imágenes de entrenamiento
 
