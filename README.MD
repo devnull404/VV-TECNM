@@ -10,4 +10,4 @@ pip install matplotlib
 
 # Imágenes de entrenamiento
 
-![alt text] (https://github.com/devnull404/VV-TECNM/blob/master/work-01/img/sand.jpg)
+![alt text](https://github.com/devnull404/VV-TECNM/blob/master/work-01/img/sand.jpg)
