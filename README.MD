@@ -10,4 +10,8 @@ pip install matplotlib
 
 # Imágenes de entrenamiento
 
+## Arena
 ![alt text](https://github.com/devnull404/VV-TECNM/blob/master/work-01/img/sand.jpg)
+
+## Mar
+![alt text](https://github.com/devnull404/VV-TECNM/blob/master/work-01/img/sea.jpg)
