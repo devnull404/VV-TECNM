@@ -5,7 +5,7 @@ Clasificar los pixeles de una imagen sand_sea, identificando si pertenecen a una
 
 # Dependencias
 ```bash
-pip install numpy <br >
+pip install numpy  
 pip install matplotlib
 ```
 
