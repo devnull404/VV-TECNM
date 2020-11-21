@@ -4,10 +4,10 @@ Clasificar los pixeles de una imagen sand_sea, identificando si pertenecen a una
 
 
 # Dependencias
-`
-pip install numpy
+```bash
+pip install numpy <br >
 pip install matplotlib
-`
+```
 
 # Imágenes de entrenamiento
 
@@ -16,3 +16,8 @@ pip install matplotlib
 
 ## Mar
 ![alt text](https://github.com/devnull404/VV-TECNM/blob/master/work-01/img/sea.jpg)
+
+# Imagen objetivo
+![alt text](https://github.com/devnull404/VV-TECNM/blob/master/work-01/img/sea_sand.jpg)
+
+#
