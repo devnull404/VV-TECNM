@@ -1,7 +1,11 @@
 import matplotlib.pyplot as plt
 import numpy as np
+import json
 
 print("Se han cargado las libreras correctamente")
+
+with open('data.json', 'r+') as fp:
+    data = json.load(fp)
 
 sea, sand, sea_sand = [plt.imread("./img/sea.jpg"), plt.imread("./img/sand.jpg"), plt.imread("./img/sea_sand.jpg")]
 
@@ -29,12 +33,24 @@ def sigma(img):
     mm = mu(img)
     m, n, c = img.shape
     count = 0
+    suma = 0
     for i in range(m):
         for j in range(n):
             count += (img[i][j]-mm)**2
+    print(np.sqrt(count/(n*m)))
     return np.sqrt(count/(n*m)), mm
 
-sigmafnc = [() for x in range(254)]
+
+def pdf(m, o, pixel):
+    return (1/np.sqrt(2*np.pi*(o**2)))*((np.e)**(-((pixel-m)**2)/(2*(o**2))))
+
+aux1, aux2 = sigma(sea)
+data["sea"] = {"means": aux2, "sigmas": aux1}
+aux1, aux2 = sigma(sand)
+data["sand"] = {"means": aux2, "sigmas": aux1}
+
+with open("data.json", "w+") as fp:
+    json.dump(data, fp)
 
 
 print("Valores estadísticos del set de entrenamiento: Sea -" + "\n" + str(sigma(sea)) + "\n\n")
