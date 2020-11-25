@@ -38,20 +38,21 @@ def sigma(img):
         for j in range(n):
             count += (img[i][j]-mm)**2
     print(np.sqrt(count/(n*m)))
-    return np.sqrt(count/(n*m)), mm
+    return list(np.sqrt(count/(n*m))), mm
 
 
 def pdf(m, o, pixel):
     return (1/np.sqrt(2*np.pi*(o**2)))*((np.e)**(-((pixel-m)**2)/(2*(o**2))))
 
-aux1, aux2 = sigma(sea)
-data["sea"] = {"means": aux2, "sigmas": aux1}
-aux1, aux2 = sigma(sand)
-data["sand"] = {"means": aux2, "sigmas": aux1}
+if False:
+    aux1, aux2 = sigma(sea)
+    data["sea"] = {"means": aux2, "sigmas": aux1}
+    aux1, aux2 = sigma(sand)
+    data["sand"] = {"means": aux2, "sigmas": aux1}
 
-with open("data.json", "w+") as fp:
-    json.dump(data, fp)
+def saveParameters(dataIn):
+    with open("data.json", "w+") as fp:
+        json.dump(dataIn, fp)
 
-
-print("Valores estadísticos del set de entrenamiento: Sea -" + "\n" + str(sigma(sea)) + "\n\n")
-print("Valores estadísticos del set de entrenamiento: Sand -" + "\n" + str(sigma(sand)) + "\n\n")
+print("Los parámetros de la imagen son: " + str(data["sea"]))
+print("Los parámetros de la imagen son: " + str(data["sand"]))
