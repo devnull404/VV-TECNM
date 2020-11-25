@@ -28,7 +28,9 @@ with open('data.json', 'r+') as fp:
 Después de haber cargado todas las librerías necesarias, podemos empezar cargando las imágenes para empezar a trabajar con ellas utilizando la librería **MatplotLib**, que llamamos en la primer sección como **plt**, entonces, cargamos en tres variables cada imagen con la función **plt.imread()**:
 
 ```python
-sea, sand, sea_sand = [plt.imread("./img/sea.jpg"), plt.imread("./img/sand.jpg"), plt.imread("./img/sea_sand.jpg")]
+sea = plt.imread("./img/sea.jpg")
+sand = plt.imread("./img/sand.jpg")
+sea_sand = plt.imread("./img/sea_sand.jpg")
 ```
 
 # Creando función para transponer una imagen dada
