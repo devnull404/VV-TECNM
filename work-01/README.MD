@@ -19,7 +19,7 @@ import numpy as np
 import json
 ```
 
-Un módulo utilizado para aligerar la carga en el CPU para realizar pruebas muchas veces, es el JSON, que nos permite trabajar con formatos .json para guardar los datos parámetros que calculemos en el disco duro como un archivo denominado data.json para no realizar los mismos cálculos una y otra vez. Entonces, con las líneas de código siguientes podemos cargar al programa los datos contenidos en este archivo para llamarlos incluso después de que se haya ejecutado el programa:
+Un módulo utilizado para aligerar la carga en el CPU para realizar pruebas muchas veces, es el JSON, que nos permite trabajar con formatos .json para guardar los datos parámetros que calculemos en el disco duro como un archivo denominado data.json y no realizar los mismos cálculos una y otra vez. Entonces, con las líneas de código siguientes podemos cargar al programa los datos contenidos en este archivo para llamarlos incluso después de que se haya ejecutado el programa:
 
 ```python
 with open('data.json', 'r+') as fp:
@@ -30,3 +30,15 @@ Después de haber cargado todas las librerías necesarias, podemos empezar carga
 ```python
 sea, sand, sea_sand = [plt.imread("./img/sea.jpg"), plt.imread("./img/sand.jpg"), plt.imread("./img/sea_sand.jpg")]
 ```
+
+Como sería ideal que todas las imágenes tuvieran el mismo tamaño y orientación, en este caso una se entuentra rotada, por lo que es necesario realizar una transformación, que en este caso, funcionaría una transpuesta para pasar de **(m,n)** => **(n,m)**, que podría realizarse con la librería **NUMPY**, pero haremos de forma manual para entender bien el procedimiento:
+
+```python
+def transpuesta(img):
+    a, b, c = img.shape
+    aux = np.empty((b, a, c), dtype=int)
+    for i in range(a):
+        for j in range(b):
+            aux[j][i] = img[i][j]
+    return aux
+    ```
