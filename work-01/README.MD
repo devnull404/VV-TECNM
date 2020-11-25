@@ -57,4 +57,58 @@ def transpuesta(img):
             aux[j][i] = img[i][j]
     return aux
 ```
-# Función para calcular el mean de cada imagen
+# Función para calcular el mean (µ) de cada imagen
+Podemos realizarlo de manera manual, calculando por fórmula, pasando por cada pixel en cada imagen y encontrar sus means, por lo que de la misma manera que en el segmento de código anterior, utilizamos un ciclo **For** anidado, pasando por cada pixel y guardando la suma de cada uno en un contador, que al final se agrega a la fórmula para regresar el resultado.
+
+```python
+def mu(img):
+    a, b, c = img.shape
+    count = [0, 0, 0]
+    for i in range(a):
+        for j in range(b):
+            count[0] += img[i][j][0]
+            count[1] += img[i][j][1]
+            count[2] += img[i][j][2]
+    count[0], count[1], count[2] = [count[0]/(a*b), count[1]/(a*b), count[2]/(a*b)]
+    return count
+```
+
+# Función para calcular Sigma (σ) 
+Por otra parte, generamos otra función que calcula el σ de cada imagen, y tiene como datos de entrada los valores µ calculados de cada imagen, por lo que sólo es necesario llamar a esta para obtener los dos valores (µ y σ).
+
+```python
+def sigma(img):
+    mm = mu(img)
+    m, n, c = img.shape
+    count = 0
+    suma = 0
+    for i in range(m):
+        for j in range(n):
+            count += (img[i][j]-mm)**2
+    print(np.sqrt(count/(n*m)))
+    return list(np.sqrt(count/(n*m))), mm
+```
+
+# Función para calcular la PDF
+Esta función simplemente toma los parámetros estadísticos de cada imagen, y los calcula para regresar el valor de la PDF.
+
+```python
+def pdf(m, o, pixel):
+    return (1/np.sqrt(2*np.pi*(o**2)))*((np.e)**(-((pixel-m)**2)/(2*(o**2))))
+```
+
+## Primer run y guardado de los parámetros estadísticos en unarchivo JSON
+
+Ahora, corremos las funciones **mu** y **sigma** para obtener sus parámetros y guardarlos en disco y no tener que llamar a la función **mu** y **sigma** ya que son pesadas para el CPU, ya que cada imagen es de un tamaño de 1200X1600, lo que da como resultado casi 2e^7 pixeles, sobre los cuales se tiene que pasan las funciones.
+
+```python
+    aux1, aux2 = sigma(sea)
+    data["sea"] = {"means": aux2, "sigmas": aux1}
+    aux1, aux2 = sigma(sand)
+    data["sand"] = {"means": aux2, "sigmas": aux1}
+
+def saveParameters(dataIn):
+    with open("data.json", "w+") as fp:
+        json.dump(dataIn, fp)
+```
+
