@@ -11,7 +11,8 @@ El modelo de clasificación propuesto con los parámetros sigma y mu de cada set
 
 ![Markdown Mark](./img/modelo.jpg)
 
-´´´python
+´´´ python
 import numpy as np  
 for i in len(200):
     i
+´´´
