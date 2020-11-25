@@ -7,20 +7,6 @@ Ingeniería Informática, 7º Semestre.
 # Materia
 Machine Learning.
 
-# Código
-Este código se basa en una ecuación gaussiana de densidad de probabilidad (PDF) con dos parámetros basados en el "entrenamiento" con dós imágenes para cada evento (1).
-
-<img src="https://render.githubusercontent.com/render/math?math=P(A_{ij_{objetivo}}| \sigma_{entrenamiento},\mu_{entrenamiento})=\frac{1}{\sqrt{2 \pi \sigma ^2}}e^{\frac{(x-\mu)^2}{2\sigma^2}}">
-
-Esto es la probabilidad de que el pixel en la imagen objetivo A(i,j) sea arena o mar.
-
-El modelo de clasificación propuesto con los parámetros sigma y mu de cada set de entrenamiento, se puede encontrar en la siguiente imagen.
-
-![alt text](https://github.com/devnull404/VV-TECNM/blob/master/work-01/img/modelo.jpg)
-
-![Markdown Mark](/img/modelo.jpg)
-
-
 # Importando módulos necesarios
 En primera instancia, debemos instalar los módulos necesarios para poder trabajar con imágnes, una de estas es NUMPY, y MatplotLib, que nos permite graficar, entre muchas otras cosas, utilizando el código siguiente:  
 
@@ -102,13 +88,41 @@ def pdf(m, o, pixel):
 Ahora, corremos las funciones **mu** y **sigma** para obtener sus parámetros y guardarlos en disco y no tener que llamar a la función **mu** y **sigma** ya que son pesadas para el CPU, ya que cada imagen es de un tamaño de 1200X1600, lo que da como resultado casi 2e^7 pixeles, sobre los cuales se tiene que pasan las funciones.
 
 ```python
-    aux1, aux2 = sigma(sea)
-    data["sea"] = {"means": aux2, "sigmas": aux1}
-    aux1, aux2 = sigma(sand)
-    data["sand"] = {"means": aux2, "sigmas": aux1}
+aux1, aux2 = sigma(sea)
+data["sea"] = {"means": aux2, "sigmas": aux1}
+aux1, aux2 = sigma(sand)
+data["sand"] = {"means": aux2, "sigmas": aux1}
 
 def saveParameters(dataIn):
     with open("data.json", "w+") as fp:
         json.dump(dataIn, fp)
+```
+
+# Función para procesar cada pixel de la imagen TEST
+Finalmente, debemos utilizar los parámetros obtenidos de cada imagen de entrenamiento para aplicarlos a la imagen TEST, y guardar los resultados en otra imagen auxiliar, aplicando las condicionales necesarias para saber si se trata de **mar** o **arena**
+
+```python
+def filtro(img, data):
+    n, m, c = img.shape
+    aux = np.empty((n, m, c), dtype=int)
+    aux[:][:][:] = 0
+    for i in range(n):
+        for j in range(m):
+            pixel = img[i][j][2]
+            if pdf(data["sea"]["means"][0], data["sea"]["sigmas"][0], pixel) > 0.005:
+                aux[i][j][:] = 254
+    return aux
+```
+
+# Mostrando los resultados
+
+Después de haber realizardo todos los cálculos, podemos mostrar nuestros resultados en una sola figura con subplots, mostrando todas las imágenes (sea, sand, sea_sand y test).
+
+```python
+fig, ax = plt.subplots(2,2)
+ax[0,0].imshow(sea)
+ax[0,1].imshow(transpuesta(sand))
+ax[1,1].imshow(filtro(sea_sand, data))
+ax[1,0].imshow(sea_sand)
 ```
 

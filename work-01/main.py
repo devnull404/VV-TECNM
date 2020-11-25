@@ -69,7 +69,6 @@ def filtro(img, data):
             pixel = img[i][j][2]
             if pdf(data["sea"]["means"][0], data["sea"]["sigmas"][0], pixel) > 0.005:
                 aux[i][j][:] = 254
-            
     return aux
 
 fig, ax = plt.subplots(2,2)
