@@ -1,3 +1,12 @@
+# Nombre
+Vladimir Villegas Luis.  
+
+# Carrera
+Ingeniería Informática, 7º Semestre.  
+
+# Materia
+Machine Learning.
+
 # Código
 Este código se basa en una ecuación gaussiana de densidad de probabilidad (PDF) con dos parámetros basados en el "entrenamiento" con dós imágenes para cada evento (1).
 
@@ -11,6 +20,8 @@ El modelo de clasificación propuesto con los parámetros sigma y mu de cada set
 
 ![Markdown Mark](/img/modelo.jpg)
 
+
+# Importando módulos necesarios
 En primera instancia, debemos instalar los módulos necesarios para poder trabajar con imágnes, una de estas es NUMPY, y MatplotLib, que nos permite graficar, entre muchas otras cosas, utilizando el código siguiente:  
 
 ```python
@@ -19,18 +30,22 @@ import numpy as np
 import json
 ```
 
+# Guardando parámetros para multiples runs del código
 Un módulo utilizado para aligerar la carga en el CPU para realizar pruebas muchas veces, es el JSON, que nos permite trabajar con formatos .json para guardar los datos parámetros que calculemos en el disco duro como un archivo denominado data.json y no realizar los mismos cálculos una y otra vez. Entonces, con las líneas de código siguientes podemos cargar al programa los datos contenidos en este archivo para llamarlos incluso después de que se haya ejecutado el programa:
 
 ```python
 with open('data.json', 'r+') as fp:
     data = json.load(fp)
 ```
+
+# Leyendo las imágenes
 Después de haber cargado todas las librerías necesarias, podemos empezar cargando las imágenes para empezar a trabajar con ellas utilizando la librería **MatplotLib**, que llamamos en la primer sección como **plt**, entonces, cargamos en tres variables cada imagen con la función **plt.imread()**:
 
 ```python
 sea, sand, sea_sand = [plt.imread("./img/sea.jpg"), plt.imread("./img/sand.jpg"), plt.imread("./img/sea_sand.jpg")]
 ```
 
+# Creando función para transponer una imagen dada
 Como sería ideal que todas las imágenes tuvieran el mismo tamaño y orientación, en este caso una se entuentra rotada, por lo que es necesario realizar una transformación, que en este caso, funcionaría una transpuesta para pasar de **(m,n)** => **(n,m)**, que podría realizarse con la librería **NUMPY**, pero haremos de forma manual para entender bien el procedimiento. El código que se muestra a continuación crea una imagen auxiliar vacía con dimensiones invertidas **np.empty(b, a, c)** obteniendo los valores con el método **.shape**, que nos da las dimensiones de la imagen de entrada en la función. Finalmente, se pasa por cada pixel con dos ciclos *For* anidados para pasar por cada fila y collumna, para intercambiar las comumnas por las filas mediante **aux[j][i] = img[i][j]**
 
 ```python
@@ -42,3 +57,4 @@ def transpuesta(img):
             aux[j][i] = img[i][j]
     return aux
 ```
+# Función para calcular el mean de cada imagen
