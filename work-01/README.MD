@@ -8,3 +8,10 @@ Esto es la probabilidad de que el pixel en la imagen objetivo A(i,j) sea arena o
 El modelo de clasificación propuesto con los parámetros sigma y mu de cada set de entrenamiento, se puede encontrar en la siguiente imagen.
 
 ![alt text](https://github.com/devnull404/VV-TECNM/blob/master/work-01/img/modelo.jpg)
+
+![Markdown Mark](./img/modelo.jpg)
+
+´´´python
+import numpy as np  
+for i in len(200):
+    i
