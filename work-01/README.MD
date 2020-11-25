@@ -31,7 +31,7 @@ Después de haber cargado todas las librerías necesarias, podemos empezar carga
 sea, sand, sea_sand = [plt.imread("./img/sea.jpg"), plt.imread("./img/sand.jpg"), plt.imread("./img/sea_sand.jpg")]
 ```
 
-Como sería ideal que todas las imágenes tuvieran el mismo tamaño y orientación, en este caso una se entuentra rotada, por lo que es necesario realizar una transformación, que en este caso, funcionaría una transpuesta para pasar de **(m,n)** => **(n,m)**, que podría realizarse con la librería **NUMPY**, pero haremos de forma manual para entender bien el procedimiento:
+Como sería ideal que todas las imágenes tuvieran el mismo tamaño y orientación, en este caso una se entuentra rotada, por lo que es necesario realizar una transformación, que en este caso, funcionaría una transpuesta para pasar de **(m,n)** => **(n,m)**, que podría realizarse con la librería **NUMPY**, pero haremos de forma manual para entender bien el procedimiento. El código que se muestra a continuación crea una imagen auxiliar vacía con dimensiones invertidas **np.empty(b, a, c)** obteniendo los valores con el método **.shape**, que nos da las dimensiones de la imagen de entrada en la función. Finalmente, se pasa por cada pixel con dos ciclos *For* anidados para pasar por cada fila y collumna, para intercambiar las comumnas por las filas mediante **aux[j][i] = img[i][j]**
 
 ```python
 def transpuesta(img):
@@ -41,4 +41,4 @@ def transpuesta(img):
         for j in range(b):
             aux[j][i] = img[i][j]
     return aux
-    ```
+```
