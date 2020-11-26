@@ -58,7 +58,6 @@ print("Los parámetros de la imagen son: " + str(data["sea"]))
 print("Los parámetros de la imagen son: " + str(data["sand"]))
 
 plt.ion()
-plt.imshow(sea_sand)
 
 def filtro(img, data):
     n, m, c = img.shape
@@ -72,7 +71,6 @@ def filtro(img, data):
     return aux
 
 fig, ax = plt.subplots(2,2)
-
 ax[0,0].imshow(sea)
 ax[0,1].imshow(transpuesta(sand))
 ax[1,1].imshow(filtro(sea_sand, data))
