@@ -178,5 +178,5 @@ ax[1,0].imshow(sea_sand)
 
 # Resultados del algoritmo:
 
-![Resultado Binario]("/img/RESULT.png")
-![Resultado Binario]("/img/mozaico.png")
+![Resultado Binario]("./img/RESULT.png")
+![Resultado Binario]("./img/mozaico.png")
